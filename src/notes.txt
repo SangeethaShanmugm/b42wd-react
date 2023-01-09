@@ -1,0 +1,12 @@
+
+
+//JSX - JS XML - extended
+//class- reserved js
+// JSX - conveeted to javascript
+// webpack + babel - react code to machine understanding code
+
+// SPA - index.html - 1
+//{} - Template syntax
+
+//Create a profile pic and name
+//props - property - object {k: v}
