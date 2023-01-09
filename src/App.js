@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+import Card1 from "./Card1";
 function App() {
   //array of string
   // const people = ["Abhishek", "Sarath", "Swathi", "Amol"];
@@ -21,11 +22,12 @@ function App() {
 
   return (
     <div className="App">
+      <Card1 />
       {/* <h1>Hello Everyone</h1> */}
-      <Counter />
+      {/* <Counter />
       {users.map((usr) => (
         <Msg name={usr.name} pic={usr.pic} />
-      ))}
+      ))} */}
 
       {/* {people.map((person) => (
         <Welcome name={person} />
