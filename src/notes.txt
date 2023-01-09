@@ -10,3 +10,15 @@
 
 //Create a profile pic and name
 //props - property - object {k: v}
+
+
+Hook(function) -useState  -destructure
+const [state, setState] = useState(initialValue)
+
+eg
+state of the art technology - top technology in current
+state of mind - currently running in your mind
+state - current scenario
+setState - change the state value 
+
+//Task - create a dislike button 

@@ -10,6 +10,6 @@
   border-radius: 50%;
 }
 
-.App>div:nth-child(4)>.profile-pic {
+.App>div:nth-child(1)>.profile-pic {
   border-radius: 0px;
 }
