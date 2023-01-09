@@ -23,9 +23,9 @@ function App() {
     <div className="App">
       {/* <h1>Hello Everyone</h1> */}
       <Counter />
-      {/* {users.map((usr) => (
+      {users.map((usr) => (
         <Msg name={usr.name} pic={usr.pic} />
-      ))} */}
+      ))}
 
       {/* {people.map((person) => (
         <Welcome name={person} />
