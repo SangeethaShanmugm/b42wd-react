@@ -22,10 +22,10 @@ function App() {
 
   return (
     <div className="App">
-      <Card1 />
       {/* <h1>Hello Everyone</h1> */}
-      {/* <Counter />
-      {users.map((usr) => (
+      {/* <Counter /> */}
+      <AddColor />
+      {/* {users.map((usr) => (
         <Msg name={usr.name} pic={usr.pic} />
       ))} */}
 
@@ -52,13 +52,63 @@ function App() {
   );
 }
 
+function AddColor() {
+  // const color = "skyblue";
+  const [color, setColor] = useState("skyblue");
+  // const colorList = ["orange", "pink", "red", "violet"];
+  const [colorList, setColorList] = useState([
+    "orange",
+    "pink",
+    "red",
+    "violet",
+  ]);
+  const styles = {
+    backgroundColor: color,
+  };
+
+  return (
+    <div>
+      <div className="add-color">
+        <input
+          onChange={(event) => setColor(event.target.value)}
+          style={styles}
+          type="text"
+          value={color}
+        />
+
+        <button
+          //copy the colorList and add newColor to it
+          onClick={() => setColorList([color])}
+        >
+          Add Color
+        </button>
+      </div>
+      {colorList.map((clr) => (
+        <ColorBox color={clr} />
+      ))}
+    </div>
+  );
+}
+
+function ColorBox({ color }) {
+  const styles = {
+    backgroundColor: color,
+    width: "180px",
+    height: "35px",
+    marginTop: "10px",
+  };
+  return <div style={styles}></div>;
+}
+
 function Counter() {
   // let like = 10;
   const [like, setLike] = useState(0);
+  const [dislike, setDislike] = useState(0);
   return (
     <div>
       {/* camelcase - onClick */}
       <button onClick={() => setLike(like + 1)}>👍 {like}</button>
+      <button onClick={() => setDislike(dislike + 1)}>👎 {dislike}</button>
     </div>
   );
 }
