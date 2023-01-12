@@ -1,4 +1,4 @@
-function Msg({ pic, name }) {
+export function Msg({ pic, name }) {
   return (
     <div>
       <img className="profile-pic" src={pic} alt={name} />
