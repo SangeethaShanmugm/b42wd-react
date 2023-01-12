@@ -91,9 +91,14 @@ function App() {
         <Route path="/book" element={<BookList />} />
         <Route path="/color-game" element={<AddColor />} />
         <Route path="/users" element={<UserList />} />
+        {/* <Route path="/book/" element={<BookDetail />} /> */}
       </Routes>
     </div>
   );
+}
+
+function BookDetail() {
+  return <div>Book Detail Page</div>;
 }
 
 function BookList() {
@@ -101,13 +106,13 @@ function BookList() {
   return (
     <div className="book-list">
       {bookList.map((bk, index) => (
-        <Book key={index} book={bk} />
+        <Book key={index} book={bk} id={index} />
       ))}
     </div>
   );
 }
 
-function Book({ book }) {
+function Book({ book, id }) {
   const [show, setShow] = useState(true);
   //conditional Styling
   const styles = {
@@ -127,13 +132,15 @@ function Book({ book }) {
     <div className="book-container">
       <img className="book-poster" src={book.poster} alt={book.name} />
       <div className="book-spec">
-        <h2 className="book-name">{book.name}</h2>
+        <h2 className="book-name">
+          {book.name} - {id}
+        </h2>
         <p style={styles} className="book-rating">
           ⭐{book.rating}
         </p>
       </div>
       <button onClick={() => setShow(!show)}>Toggle Summary</button>
-      <button onClick={() => navigate("/color-game")}>Info</button>
+      <button onClick={() => navigate("/book/" + id)}>Info</button>
       {/* <p style={summaryStyle} className="book-summary">
         {book.summary}
       </p> */}
