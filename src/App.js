@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Routes, Route, Link, useNavigate, useParams } from "react-router-dom";
 import { Counter } from "./Counter";
 import { AddColor } from "./AddColor";
 import { Home } from "./Home";
@@ -91,14 +91,15 @@ function App() {
         <Route path="/book" element={<BookList />} />
         <Route path="/color-game" element={<AddColor />} />
         <Route path="/users" element={<UserList />} />
-        {/* <Route path="/book/" element={<BookDetail />} /> */}
+        <Route path="/book/:bookid" element={<BookDetail />} />
       </Routes>
     </div>
   );
 }
 
 function BookDetail() {
-  return <div>Book Detail Page</div>;
+  const { bookid } = useParams();
+  return <div>Book Detail Page of {bookid}</div>;
 }
 
 function BookList() {
