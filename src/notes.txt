@@ -68,4 +68,12 @@ setState - change the state value
       name: "Swathi",
     },
   ];
-     
+
+
+
+task - AddColor comp
+
+Add Book comp
+4 fields - name, poster, rating, summary
+1 button - AddBook
+20 mins - 11:50 

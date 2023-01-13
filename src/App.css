@@ -50,3 +50,10 @@
   justify-content: space-around;
   gap: 16px;
 }
+
+.add-book-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
