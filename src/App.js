@@ -1,10 +1,11 @@
 import "./App.css";
 import { useState } from "react";
-import { Routes, Route, Link, useNavigate, useParams } from "react-router-dom";
-import { Counter } from "./Counter";
+import { Routes, Route, Link } from "react-router-dom";
 import { AddColor } from "./AddColor";
 import { Home } from "./Home";
 import { UserList } from "./UserList";
+import { BookList } from "./BookList";
+import { BookDetail } from "./BookDetail";
 const INITIAL_BOOK_LIST = [
   {
     name: "Charlotte's web",
@@ -67,6 +68,8 @@ const INITIAL_BOOK_LIST = [
 ];
 
 function App() {
+  //Lifting the stateup -> Lifted from child to parent
+  const [bookList, setBookList] = useState(INITIAL_BOOK_LIST);
   return (
     <div className="App">
       <nav>
@@ -88,113 +91,19 @@ function App() {
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/book" element={<BookList />} />
+        <Route
+          path="/book"
+          element={<BookList bookList={bookList} setBookList={setBookList} />}
+        />
         <Route path="/color-game" element={<AddColor />} />
         <Route path="/users" element={<UserList />} />
-        <Route path="/book/:bookid" element={<BookDetail />} />
+        <Route
+          path="/book/:bookid"
+          element={<BookDetail bookList={bookList} />}
+        />
       </Routes>
     </div>
   );
 }
 
-function BookDetail() {
-  const { bookid } = useParams();
-  return <div>Book Detail Page of {bookid}</div>;
-}
-
-function BookList() {
-  // const bookList = INITIAL_BOOK_LIST;
-  const [bookList, setBookList] = useState(INITIAL_BOOK_LIST);
-  const [name, setName] = useState("");
-  const [poster, setPoster] = useState("");
-  const [rating, setRating] = useState("");
-  const [summary, setSummary] = useState("");
-  return (
-    <div>
-      <div className="add-book-form">
-        <input
-          onChange={(event) => setName(event.target.value)}
-          type="text"
-          placeholder="Enter a name"
-        />
-        <input
-          onChange={(event) => setPoster(event.target.value)}
-          type="text"
-          placeholder="Enter a poster"
-        />
-        <input
-          onChange={(event) => setRating(event.target.value)}
-          type="text"
-          placeholder="Enter a rating"
-        />
-        <input
-          onChange={(event) => setSummary(event.target.value)}
-          type="text"
-          placeholder="Enter a summary"
-        />
-        <button
-          onClick={() => {
-            const newBook = {
-              name: name,
-              poster: poster,
-              rating: rating,
-              summary: summary,
-            };
-            // {/* //copy the bookList and add newBook to it */}
-            setBookList([...bookList, newBook]);
-          }}
-        >
-          Add Book
-        </button>
-      </div>
-      <div className="book-list">
-        {bookList.map((bk, index) => (
-          <Book key={index} book={bk} id={index} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function Book({ book, id }) {
-  const [show, setShow] = useState(true);
-  //conditional Styling
-  const styles = {
-    color: book.rating > 8 ? "green" : "red",
-  };
-
-  //true - visible
-  //false - hide
-  // !true - false
-  // !false - true
-  // const summaryStyle = {
-  //   display: show ? "block" : "none",
-  // };
-
-  const navigate = useNavigate();
-  return (
-    <div className="book-container">
-      <img className="book-poster" src={book.poster} alt={book.name} />
-      <div className="book-spec">
-        <h2 className="book-name">
-          {book.name} - {id}
-        </h2>
-        <p style={styles} className="book-rating">
-          ⭐{book.rating}
-        </p>
-      </div>
-      <button onClick={() => setShow(!show)}>Toggle Summary</button>
-      <button onClick={() => navigate("/book/" + id)}>Info</button>
-      {/* <p style={summaryStyle} className="book-summary">
-        {book.summary}
-      </p> */}
-      {/* conditional rendering */}
-      {show ? <p className="book-summary">{book.summary}</p> : null}
-      <Counter />
-    </div>
-  );
-}
-
 export default App;
-
-//TAsk - rating > 8 ? green : red

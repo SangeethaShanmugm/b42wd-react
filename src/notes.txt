@@ -77,3 +77,21 @@ Add Book comp
 4 fields - name, poster, rating, summary
 1 button - AddBook
 20 mins - 11:50 
+
+
+//TAsk - rating > 8 ? green : red
+
+
+BookList(data)   ->  Book(data)   -> Counter(data)
+                 -> Contact(data)
+
+ React flows in one direction | Pass from parent to child ✅
+From child to Parent ❌                
+undirectional
+
+               App (bookList, setBookList)
+
+    
+    
+    
+    BookList           BookDetail       
