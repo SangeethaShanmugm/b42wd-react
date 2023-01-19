@@ -6,6 +6,9 @@ import { Home } from "./Home";
 import { UserList } from "./UserList";
 import { BookList } from "./BookList";
 import { BookDetail } from "./BookDetail";
+import { NotFoundPage } from "./NotFoundPage";
+import { AddBook } from "./AddBook";
+
 const INITIAL_BOOK_LIST = [
   {
     name: "Charlotte's web",
@@ -88,6 +91,9 @@ function App() {
           <li>
             <Link to="/users">UserList</Link>
           </li>
+          <li>
+            <Link to="/book/add">AddBook</Link>
+          </li>
         </ul>
       </nav>
       <Routes>
@@ -102,18 +108,14 @@ function App() {
           path="/book/:bookid"
           element={<BookDetail bookList={bookList} />}
         />
+        <Route
+          path="/book/add"
+          element={<AddBook bookList={bookList} setBookList={setBookList} />}
+        />
         <Route path="/novel" element={<Navigate replace to="/book" />} />
         <Route path="/404" element={<NotFoundPage />} />
         <Route path="*" element={<Navigate replace to="/404" />} />
       </Routes>
-    </div>
-  );
-}
-
-function NotFoundPage() {
-  return (
-    <div>
-      <img src="https://cdn.dribbble.com/users/1175431/screenshots/6188233/404-error-dribbble-800x600.gif" />
     </div>
   );
 }

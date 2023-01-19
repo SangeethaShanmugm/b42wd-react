@@ -95,3 +95,10 @@ undirectional
     
     
     BookList           BookDetail       
+
+
+
+
+    //Task - 20 mins
+// /book/add  - AddBook
+// AddBook ->  book added -> /book(BookList page)
