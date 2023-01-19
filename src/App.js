@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 import { AddColor } from "./AddColor";
 import { Home } from "./Home";
 import { UserList } from "./UserList";
@@ -14,6 +14,7 @@ const INITIAL_BOOK_LIST = [
     rating: 8.8,
     summary:
       "The novel tells the story of a livestock pig named Wilbur and his friendship with a barn spider named Charlotte. When Wilbur is in danger of being slaughtered by the farmer, Charlotte writes messages praising Wilbur in her web in order to persuade the farmer to let him live.",
+    trailer: "https://www.youtube.com/embed/zS3qOr0zAJg",
   },
   {
     name: "The power of your subconscious mind",
@@ -101,7 +102,18 @@ function App() {
           path="/book/:bookid"
           element={<BookDetail bookList={bookList} />}
         />
+        <Route path="/novel" element={<Navigate replace to="/book" />} />
+        <Route path="/404" element={<NotFoundPage />} />
+        <Route path="*" element={<Navigate replace to="/404" />} />
       </Routes>
+    </div>
+  );
+}
+
+function NotFoundPage() {
+  return (
+    <div>
+      <img src="https://cdn.dribbble.com/users/1175431/screenshots/6188233/404-error-dribbble-800x600.gif" />
     </div>
   );
 }

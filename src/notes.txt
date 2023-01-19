@@ -85,7 +85,7 @@ Add Book comp
 BookList(data)   ->  Book(data)   -> Counter(data)
                  -> Contact(data)
 
- React flows in one direction | Pass from parent to child ✅
+React flows in one direction | Pass from parent to child ✅
 From child to Parent ❌                
 undirectional
 
