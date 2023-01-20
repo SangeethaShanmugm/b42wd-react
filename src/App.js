@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
+import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
 import { AddColor } from "./AddColor";
 import { Home } from "./Home";
 import { UserList } from "./UserList";
@@ -8,6 +8,11 @@ import { BookList } from "./BookList";
 import { BookDetail } from "./BookDetail";
 import { NotFoundPage } from "./NotFoundPage";
 import { AddBook } from "./AddBook";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import { Button } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
 
 const INITIAL_BOOK_LIST = [
   {
@@ -71,15 +76,47 @@ const INITIAL_BOOK_LIST = [
   },
 ];
 
+//1. Creating  - createContext ✅
+//2. Publisher - provider - context.Provider ✅
+//3. Subscriber - useContext - useContext(context) ❌
+
+const theme = createTheme({
+  palette: {
+    mode: "light",
+  },
+});
+
 function App() {
   //Lifting the stateup -> Lifted from child to parent
   const [bookList, setBookList] = useState(INITIAL_BOOK_LIST);
+  const navigate = useNavigate();
   return (
-    <div className="App">
-      <nav>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div>
+        <AppBar position="static">
+          <Toolbar>
+            <Button color="inherit" onClick={() => navigate("/")}>
+              Home
+            </Button>
+            <Button color="inherit" onClick={() => navigate("/book")}>
+              BookList
+            </Button>
+            <Button color="inherit" onClick={() => navigate("/book/add")}>
+              AddBook
+            </Button>
+            <Button color="inherit" onClick={() => navigate("/color-game")}>
+              AddColor
+            </Button>
+            <Button color="inherit" onClick={() => navigate("/users")}>
+              UserList
+            </Button>
+          </Toolbar>
+        </AppBar>
+        {/* <nav>
         <ul>
           <li>
-            {/* Link change page without refresh */}
+            Link change page without refresh
             <Link to="/">Home</Link>
           </li>
           <li>
@@ -95,28 +132,29 @@ function App() {
             <Link to="/book/add">AddBook</Link>
           </li>
         </ul>
-      </nav>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/book"
-          element={<BookList bookList={bookList} setBookList={setBookList} />}
-        />
-        <Route path="/color-game" element={<AddColor />} />
-        <Route path="/users" element={<UserList />} />
-        <Route
-          path="/book/:bookid"
-          element={<BookDetail bookList={bookList} />}
-        />
-        <Route
-          path="/book/add"
-          element={<AddBook bookList={bookList} setBookList={setBookList} />}
-        />
-        <Route path="/novel" element={<Navigate replace to="/book" />} />
-        <Route path="/404" element={<NotFoundPage />} />
-        <Route path="*" element={<Navigate replace to="/404" />} />
-      </Routes>
-    </div>
+      </nav> */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/book"
+            element={<BookList bookList={bookList} setBookList={setBookList} />}
+          />
+          <Route path="/color-game" element={<AddColor />} />
+          <Route path="/users" element={<UserList />} />
+          <Route
+            path="/book/:bookid"
+            element={<BookDetail bookList={bookList} />}
+          />
+          <Route
+            path="/book/add"
+            element={<AddBook bookList={bookList} setBookList={setBookList} />}
+          />
+          <Route path="/novel" element={<Navigate replace to="/book" />} />
+          <Route path="/404" element={<NotFoundPage />} />
+          <Route path="*" element={<Navigate replace to="/404" />} />
+        </Routes>
+      </div>
+    </ThemeProvider>
   );
 }
 
