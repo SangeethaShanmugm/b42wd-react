@@ -13,7 +13,8 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import { Button } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
-
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 const INITIAL_BOOK_LIST = [
   {
     name: "Charlotte's web",
@@ -80,15 +81,17 @@ const INITIAL_BOOK_LIST = [
 //2. Publisher - provider - context.Provider ✅
 //3. Subscriber - useContext - useContext(context) ❌
 
-const theme = createTheme({
-  palette: {
-    mode: "light",
-  },
-});
-
 function App() {
   //Lifting the stateup -> Lifted from child to parent
   const [bookList, setBookList] = useState(INITIAL_BOOK_LIST);
+  const [mode, setMode] = useState("light");
+
+  const theme = createTheme({
+    palette: {
+      mode: mode,
+    },
+  });
+
   const navigate = useNavigate();
   return (
     <ThemeProvider theme={theme}>
@@ -110,6 +113,15 @@ function App() {
             </Button>
             <Button color="inherit" onClick={() => navigate("/users")}>
               UserList
+            </Button>
+            <Button
+              startIcon={
+                mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />
+              }
+              color="inherit"
+              onClick={() => setMode(mode === "light" ? "dark" : "light")}
+            >
+              {mode === "light" ? "dark" : "light"} Mode
             </Button>
           </Toolbar>
         </AppBar>
