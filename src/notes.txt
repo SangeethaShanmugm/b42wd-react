@@ -102,3 +102,13 @@ undirectional
     //Task - 20 mins
 // /book/add  - AddBook
 // AddBook ->  book added -> /book(BookList page)
+
+
+Summarize
+-----------
+
+1. cut down the props
+2. copy the useEffect and change setState
+   - BookList - []
+   - BookDetail - {}
+3.   BookDetail  -  pass id instead of index value  

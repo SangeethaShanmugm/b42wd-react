@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
 import { AddColor } from "./AddColor";
 import { Home } from "./Home";
@@ -92,10 +92,6 @@ function App() {
     },
   });
   const [bookList, setBookList] = useState([]);
-  fetch("https://63cf85c4e52f587829a00406.mockapi.io/books")
-    .then((res) => res.json())
-    .then((data) => setBookList(data));
-
   const navigate = useNavigate();
   return (
     <ThemeProvider theme={theme}>
@@ -151,16 +147,10 @@ function App() {
       </nav> */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/book"
-            element={<BookList bookList={bookList} setBookList={setBookList} />}
-          />
+          <Route path="/book" element={<BookList />} />
           <Route path="/color-game" element={<AddColor />} />
           <Route path="/users" element={<UserList />} />
-          <Route
-            path="/book/:bookid"
-            element={<BookDetail bookList={bookList} />}
-          />
+          <Route path="/book/:bookid" element={<BookDetail />} />
           <Route
             path="/book/add"
             element={<AddBook bookList={bookList} setBookList={setBookList} />}

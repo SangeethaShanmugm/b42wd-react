@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Counter } from "./Counter";
 import IconButton from "@mui/material/IconButton";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import InfoIcon from "@mui/icons-material/Info";
+import { API } from "./global";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-export function Book({ book, id }) {
+export function Book({ book, id, deleteButton }) {
   const [show, setShow] = useState(true);
   //conditional Styling
   const styles = {
@@ -21,6 +23,17 @@ export function Book({ book, id }) {
   //   display: show ? "block" : "none",
   // };
   const navigate = useNavigate();
+  // const [bookList, setBookList] = useState([]);
+  // const getBooks = () => {
+  //   fetch(`${API}/books`, {
+  //     method: "GET",
+  //   })
+  //     .then((data) => data.json())
+  //     .then((bks) => setBookList(bks));
+  // };
+
+  // useEffect(() => getBooks(), []);
+
   return (
     <div className="book-container">
       <img className="book-poster" src={book.poster} alt={book.name} />
@@ -32,7 +45,6 @@ export function Book({ book, id }) {
           ⭐{book.rating}
         </p>
       </div>
-
       <IconButton
         aria-label="toggle-description"
         onClick={() => setShow(!show)}
@@ -40,7 +52,6 @@ export function Book({ book, id }) {
       >
         {show ? <ExpandLessIcon /> : <ExpandMoreIcon />}
       </IconButton>
-
       <IconButton
         aria-label="info"
         onClick={() => navigate("/book/" + id)}
@@ -48,13 +59,23 @@ export function Book({ book, id }) {
       >
         <InfoIcon />
       </IconButton>
-
       {/* <p style={summaryStyle} className="book-summary">
               {book.summary}
             </p> */}
       {/* conditional rendering */}
       {show ? <p className="book-summary">{book.summary}</p> : null}
       <Counter />
+      {deleteButton}
+      {/* <IconButton
+        color="error"
+        onClick={() => {
+          fetch(`${API}/books/${id}`, {
+            method: "DELETE",
+          }).then(() => getBooks());
+        }}
+      >
+        <DeleteIcon />
+      </IconButton> */}
     </div>
   );
 }
