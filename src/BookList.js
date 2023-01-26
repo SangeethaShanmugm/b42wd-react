@@ -5,7 +5,8 @@ import { Book } from "./Book";
 import { API } from "./global";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-
+import EditIcon from "@mui/icons-material/Edit";
+import { useNavigate } from "react-router-dom";
 export function BookList() {
   // const bookList = INITIAL_BOOK_LIST;
   const [bookList, setBookList] = useState([]);
@@ -32,6 +33,7 @@ export function BookList() {
   };
 
   useEffect(() => getBooks(), []);
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -66,9 +68,20 @@ export function BookList() {
               //   <DeleteIcon />
               // </IconButton>
             }
+            editButton={
+              <IconButton
+                color="secondary"
+                onClick={() => navigate(`/book/edit/${bk.id}`)}
+              >
+                <EditIcon />
+              </IconButton>
+            }
           />
         ))}
       </div>
     </div>
   );
 }
+
+//Edit Book --> PUT method
+// BookDetail + AddBook

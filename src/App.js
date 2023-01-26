@@ -15,6 +15,9 @@ import { Button } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { EditBook } from "./EditBook";
+import BasicForm from "./BasicForm";
+
 // const INITIAL_BOOK_LIST = [
 //   {
 //     name: "Charlotte's web",
@@ -114,6 +117,9 @@ function App() {
             <Button color="inherit" onClick={() => navigate("/users")}>
               UserList
             </Button>
+            <Button color="inherit" onClick={() => navigate("/basic-form")}>
+              BasicForm
+            </Button>
             <Button
               startIcon={
                 mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />
@@ -151,10 +157,9 @@ function App() {
           <Route path="/color-game" element={<AddColor />} />
           <Route path="/users" element={<UserList />} />
           <Route path="/book/:bookid" element={<BookDetail />} />
-          <Route
-            path="/book/add"
-            element={<AddBook bookList={bookList} setBookList={setBookList} />}
-          />
+          <Route path="/book/add" element={<AddBook />} />
+          <Route path="/book/edit/:bookid" element={<EditBook />} />
+          <Route path="/basic-form" element={<BasicForm />} />
           <Route path="/novel" element={<Navigate replace to="/book" />} />
           <Route path="/404" element={<NotFoundPage />} />
           <Route path="*" element={<Navigate replace to="/404" />} />

@@ -8,7 +8,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import { API } from "./global";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export function Book({ book, id, deleteButton }) {
+export function Book({ book, id, deleteButton, editButton }) {
   const [show, setShow] = useState(true);
   //conditional Styling
   const styles = {
@@ -65,7 +65,7 @@ export function Book({ book, id, deleteButton }) {
       {/* conditional rendering */}
       {show ? <p className="book-summary">{book.summary}</p> : null}
       <Counter />
-      {deleteButton}
+      {deleteButton} {editButton}
       {/* <IconButton
         color="error"
         onClick={() => {
